@@ -4,23 +4,29 @@ import { BitmapLayer, IconLayer } from "@deck.gl/layers";
 import { DeckGL } from "@deck.gl/react";
 import useMultipleTrackersMap from "./useMap";
 import { IPackage } from "@/app/lib/definition/package";
+import { useEffect } from "react";
+import { getFitBound } from "@/app/util/getFitBound";
+import { svgToDataURL } from "@/app/util/svgToDataURL";
 
 export default function Map(props: {
   packages: IPackage<{ latitude: number; longitude: number }>[];
 }) {
-  const { convertTrackerPositionsForDeckGl, initialViewState } =
-    useMultipleTrackersMap();
+  const {
+    convertTrackerPositionsForDeckGl,
+    initialViewState,
+    setInitialViewState,
+  } = useMultipleTrackersMap();
   const { packages } = props;
 
   const MAPBOX_API = process.env.NEXT_PUBLIC_MAPBOX_API_KEY;
 
-  function svgToDataURL(svg: any) {
-    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-  }
+  const coordinates = convertTrackerPositionsForDeckGl(packages);
+
   const layers = [
     new TileLayer({
       pickable: true,
       data: `https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${MAPBOX_API}`,
+      // data: "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
       renderSubLayers: (props) => {
         const {
           //@ts-ignore
@@ -37,7 +43,7 @@ export default function Map(props: {
     new IconLayer({
       id: "icon-layer",
       pickable: true,
-      data: convertTrackerPositionsForDeckGl(packages),
+      data: coordinates,
       sizeScale: 20,
       getIcon: () => ({
         url: svgToDataURL(`<svg width="26" height="31" viewBox="0 0 26 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,6 +62,16 @@ export default function Map(props: {
       getPosition: (d) => [d.coordinates.lng, d.coordinates.lat],
     }),
   ];
+
+  useEffect(() => {
+    const fitBound = getFitBound(coordinates.map((c) => c.coordinates));
+    setInitialViewState({
+      ...initialViewState,
+      longitude: fitBound.centerLng,
+      latitude: fitBound.centerLat,
+      zoom: fitBound.zoom,
+    });
+  }, []);
 
   return (
     <div className="h-full w-full relative">

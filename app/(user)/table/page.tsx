@@ -1,7 +1,12 @@
+import { listMany } from "@/app/lib/action/last_package";
+import { LastPackageTable } from "@/app/ui/tables/last_package";
+
 export default async function Table() {
+  const packages = await listMany();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      table
+    <main className="grid grid-rows-[min-content_1fr] gap-4 p-24">
+      <h1>Últimos dados recebidos</h1>
+      <LastPackageTable data={packages} />
     </main>
   );
 }
