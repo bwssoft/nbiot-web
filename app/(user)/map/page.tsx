@@ -1,4 +1,4 @@
-import { listMany } from "@/app/lib/action/package";
+import { listMany } from "@/app/lib/action/last_package";
 import { IPackage } from "@/app/lib/definition/package";
 import Map from "@/app/ui/map";
 
