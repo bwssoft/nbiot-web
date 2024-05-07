@@ -11,7 +11,7 @@ async function connect() {
 async function list(params: Filter<IPackage> = {}) {
   const db = await connect();
   const pack: Collection<IPackage> = db.collection("package");
-  const data = await pack.find(params).toArray();
+  const data = await pack.find(params).project({ _id: 0 }).toArray();
   return data as IPackage[]
 }
 
