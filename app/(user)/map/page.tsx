@@ -1,6 +1,6 @@
 import { listMany } from "@/app/lib/action/last_package";
 import { IPackage } from "@/app/lib/definition/package";
-import Map from "@/app/ui/map";
+import Map from "@/app/ui/@pages/map";
 
 export default async function MapPage() {
   const packages = await listMany();
