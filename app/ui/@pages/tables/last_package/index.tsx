@@ -2,7 +2,7 @@
 
 import { useMediaQuery } from "@/app/hook/use-media-query";
 import { columns } from "./columns";
-import { DataTableDesktop, DataTableMobile } from "../../table";
+import { DataTableDesktop, DataTableMobile } from "../../../table";
 import { ILastPackage } from "@/app/lib/definition/last_package";
 
 type LastPackageTableProps = {

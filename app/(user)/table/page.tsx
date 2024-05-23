@@ -1,10 +1,12 @@
-import { listMany } from "@/app/lib/action/last_package";
-import { LastPackageTable } from "@/app/ui/tables/last_package";
+// import { listMany } from "@/app/lib/action/last_package";
+import { listMany } from "@/app/lib/action/search_package";
+
+import { LastPackageTable } from "@/app/ui/@pages/tables/last_package";
 import { InputComponent } from "@/app/ui/input/index";
 import { Button } from "@bwsoft/button";
 
 export default async function Table() {
-  const packages = await listMany();
+  const packages = await listMany({});
   return (
     <main className="grid grid-rows-[min-content_1fr] gap-4 p-24">
       <div className="mb-12">
