@@ -12,10 +12,15 @@ export default async function Table() {
       <div className="mb-12">
         <h1 className="mb-4">Últimos dados recebidos</h1>
         <div className="flex gap-4">
-          <InputComponent />
-          <Button type="submit" className=" w-20 bg-indigo-200 text-indigo-700">
-            Buscar
-          </Button>
+          <form className=" flex flex-col h-full w-full gap-3">
+            <InputComponent />
+            <Button
+              type="submit"
+              className=" w-20 bg-indigo-200 text-indigo-700"
+            >
+              Buscar
+            </Button>
+          </form>
         </div>
       </div>
       <LastPackageTable data={packages} />
