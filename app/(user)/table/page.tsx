@@ -11,8 +11,8 @@ export default async function Table() {
     <main className="grid grid-rows-[min-content_1fr] gap-4 p-24">
       <div className="mb-12">
         <h1 className="mb-4">Últimos dados recebidos</h1>
-        <div className="flex gap-4">
-          <form className=" flex flex-col h-full w-full gap-3">
+        <div>
+          <form className="flex gap-4">
             <InputComponent />
             <Button
               type="submit"
