@@ -1,36 +1,28 @@
 "use client";
 
-import { formatSearchParams } from "@/app/util/formatSearchParams";
 import {
   Input,
-  InputLabel,
-  InputGroup,
-  InputAddOn,
   InputField,
-  InputError,
+  InputGroup,
+  InputLabel
 } from "@bwsoft/input";
+import { ComponentProps } from "react";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { usePathname, useRouter } from "next/navigation";
+interface InputComponentProps extends Omit<ComponentProps<typeof InputField>, 'children'> {
+  label?: string;
+}
 
-export function InputComponent() {
-  const pathname = usePathname();
-  const router = useRouter();
-
+export function InputComponent({ label, ...rest }: InputComponentProps) {
   return (
-    <Input>
-      <InputLabel>Pesquisar por número serial</InputLabel>
+    <Input >
+      {label && (
+        <InputLabel>{label}</InputLabel>
+      )}
       <InputGroup>
         {/* <InputAddOn Icon={MagnifyingGlassIcon} side="left" /> */}
         <InputField
+          {...rest}
           placeholder="305419896"
-          onChange={(e) => {
-            const params = formatSearchParams({
-              serial_code: e.target.value,
-            });
-
-            router.push(`${pathname}?${params}`);
-          }}
         />
       </InputGroup>
       {/* <InputError show={errors.limit_speed?.message !== undefined}>
