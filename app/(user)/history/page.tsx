@@ -1,9 +1,42 @@
-import { listMany } from "@/app/lib/action/last_package";
+import { listMany } from "@/app/lib/action/history";
+import { IPackage } from "@/app/lib/definition/package";
+import { HistoryTable } from "@/app/ui/@pages/tables/history";
+import { Filter } from "mongodb";
+import { HistoryTableFilter } from "./filter";
 
-export default async function Table() {
+interface Params {
+  searchParams: {
+    serialNumber?: string;
+  }
+}
+
+export default async function Table({ searchParams }: Params) {
+  async function fetchTrackerPackages() {
+    const query: Filter<IPackage> = {};
+
+    if (searchParams.serialNumber) {
+      query['serialNumber'] = Number(searchParams.serialNumber);
+      return await listMany(query);
+    }
+
+    return [];
+  }
+
+  const history = await fetchTrackerPackages();
+
   return (
-    <main className="grid grid-rows-[min-content_1fr] gap-4 p-24">
-      <h1>Página de histórico</h1>
+    <main className="gap-4 flex justify-center p-8 overflow-y-auto">
+      <div className="grid gap-4 container grid-rows-[min-content_1fr] h-full">
+        <div>
+          <h1 className="mb-4">Página de histórico</h1>
+
+          <HistoryTableFilter />
+
+          <small className="text-gray-500">Busque por um número de serial para preencher a tabela abaixo.</small>
+        </div>
+
+        <HistoryTable data={history} />
+      </div>
     </main>
   );
 }
