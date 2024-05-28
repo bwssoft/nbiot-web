@@ -1,6 +1,6 @@
+import "@/app/assets/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@/app/assets/globals.css";
 import { NavBar } from "../ui/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body
         style={inter.style}
-        className="h-full grid grid-rows-[min-content_1fr]"
+        className="h-screen overflow-hidden grid grid-rows-[min-content_1fr]"
       >
         <NavBar />
         {children}
