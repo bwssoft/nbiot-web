@@ -4,7 +4,7 @@ type Constructor<Decoded> = {
   package: string
   created_at: Date
   remote_info: RemoteInfo
-  serialNumber: Number
+  serialNumber: number | string
 }
 
 export type IPackage<Decoded extends Object = Object> = Constructor<Decoded>;
@@ -21,7 +21,7 @@ export class Package<Decoded> {
   readonly package: string
   readonly created_at: Date
   readonly remote_info: RemoteInfo
-  readonly serialNumber: Number
+  readonly serialNumber: number | string
 
   constructor(props: Constructor<Decoded>) {
     Object.assign(this, props)
