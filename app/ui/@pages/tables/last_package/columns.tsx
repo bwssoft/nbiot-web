@@ -1,42 +1,67 @@
 import { ILastPackage } from "@/app/lib/definition/last_package";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const columns: ColumnDef<ILastPackage<any>>[] = [
+export const columns: ColumnDef<ILastPackage>[] = [
   {
-    header: "Número Serial",
+    header: 'Número serial',
     accessorKey: "serialNumber",
-    cell: (cell) => <span>{cell.row.original.serialNumber?.toString()}</span>,
+    cell: (cell) => <span>{cell.row.original.serialNumber?.toString()}</span>
   },
   {
-    header: "Id Mensagem",
-    accessorKey: "decoded.messageId",
-    cell: (cell) => <span>{cell.row.original.decoded.messageId}</span>,
+    id: 'messageId',
+    header: "ID da mensagem",
+    cell: (cell) => {
+      if (cell.row.original.from === 'KORE') {
+        return cell.row.original.decoded["ID Msg"]
+      }
+
+      return cell.row.original.decoded.messageId
+    }
   },
   {
-    header: "Latitude",
-    accessorKey: "decoded.latitude",
-    cell: (cell) => <span>{cell.row.original.decoded.latitude}</span>,
+    id: 'coords',
+    header: "Coordenadas (latitude, longitude)",
+    cell: (cell) => {
+      if (cell.row.original.decoded.latitude === 0 && cell.row.original.decoded.longitude === 0) {
+        return 'Sem sinal GPS'
+      }
+      
+      return `${cell.row.original.decoded.latitude}, ${cell.row.original.decoded.longitude}`
+    }
   },
   {
-    header: "Longitude",
-    accessorKey: "decoded.longitude",
-    cell: (cell) => <span>{cell.row.original.decoded.longitude}</span>,
+    id: "internalBattery",
+    header: "Bateria interna",
+    cell: (cell) => {
+      if (cell.row.original.from === 'KORE') {
+        return cell.row.original.decoded["bateria interna"]
+      }
+
+      return cell.row.original.decoded.internalBattery
+    }
   },
   {
-    header: "Bateria Interna",
-    accessorKey: "decoded.internalBattery",
-    cell: (cell) => <span>{cell.row.original.decoded.internalBattery}</span>,
+    id: "externalBattery",
+    header: "Bateria externa",
+    cell: (cell) => {
+      if (cell.row.original.from === 'KORE') {
+        return cell.row.original.decoded["bateria externa"]
+      }
+
+      return cell.row.original.decoded.externalBattery
+    }
   },
   {
-    header: "Bateria Externa",
-    accessorKey: "decoded.externalBattery",
-    cell: (cell) => <span>{cell.row.original.decoded.internalBattery}</span>,
-  },
-  {
+    id: "date",
     header: "Data",
-    accessorKey: "decoded.tsGps",
-    cell: (cell) => (
-      <span>{new Date(cell.row.original.decoded.tsGps).toLocaleString()}</span>
-    ),
+    cell: (cell) => {
+      if (cell.row.original.from === 'KORE') {
+        let unix_timestamp = cell.row.original.decoded.timestamp;
+        const date = new Date(unix_timestamp * 1000);
+        return date.toLocaleString()
+      }
+
+      return cell.row.original.decoded.tsGps.toLocaleString()
+    }
   },
 ];
