@@ -15,7 +15,7 @@ export default async function Table({ searchParams }: Params) {
     const query: Filter<IPackage> = {};
 
     if (searchParams.serialNumber) {
-      query['serialNumber'] = Number(searchParams.serialNumber);
+      query['serialNumber'] = searchParams.serialNumber;
       return await listMany(query);
     }
 
