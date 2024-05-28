@@ -23,7 +23,7 @@ export const authConfig = {
         token = {
           ...token,
           uuid: user.uuid,
-          name: user.username,
+          name: user.name,
           email: user.email
         }
       }
@@ -31,7 +31,7 @@ export const authConfig = {
     },
     session({ session, token }) {
       session.user.uuid = String(token.uuid)
-      session.user.name = token.name
+      session.user.name = token.name ?? ''
       session.user.email = String(token.email)
 
 
