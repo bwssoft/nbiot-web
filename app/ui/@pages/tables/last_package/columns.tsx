@@ -5,7 +5,7 @@ export const columns: ColumnDef<ILastPackage<any>>[] = [
   {
     header: "Número Serial",
     accessorKey: "serialNumber",
-    cell: (cell) => <span>{cell.row.original.serialNumber.toString()}</span>,
+    cell: (cell) => <span>{cell.row.original.serialNumber?.toString()}</span>,
   },
   {
     header: "Id Mensagem",
