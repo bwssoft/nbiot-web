@@ -1,12 +1,12 @@
 "use client";
+import { IPackage } from "@/app/lib/definition/package";
+import { getFitBound } from "@/app/util/getFitBound";
+import { svgToDataURL } from "@/app/util/svgToDataURL";
 import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer, IconLayer } from "@deck.gl/layers";
 import { DeckGL } from "@deck.gl/react";
-import useMultipleTrackersMap from "./useMap";
-import { IPackage } from "@/app/lib/definition/package";
 import { useEffect } from "react";
-import { getFitBound } from "@/app/util/getFitBound";
-import { svgToDataURL } from "@/app/util/svgToDataURL";
+import useMultipleTrackersMap from "./useMap";
 
 export default function Map(props: {
   packages: IPackage<{ latitude: number; longitude: number }>[];
@@ -64,7 +64,11 @@ export default function Map(props: {
   ];
 
   useEffect(() => {
-    const fitBound = getFitBound(coordinates.map((c) => c.coordinates));
+    const fitBound = getFitBound(coordinates.map((c) => ({
+      lat: Number(c.coordinates.lat),
+      lng: Number(c.coordinates.lng)
+    })));
+    
     setInitialViewState({
       ...initialViewState,
       longitude: fitBound.centerLng,
