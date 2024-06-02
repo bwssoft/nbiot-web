@@ -9,25 +9,18 @@ import { SerialTableFilter } from "./filter";
 interface Params {
   searchParams: {
     serialNumber?: string;
-  }
+  };
 }
 
 export default async function Table({ searchParams }: Params) {
-  async function fetchPackages() {
-    const query: Filter<ILastPackage> = {};
+  let query: Filter<ILastPackage> = {};
 
-    if (searchParams.serialNumber) {
-      query.$or = [
-        { serialNumber: searchParams.serialNumber },
-        { serialNumber: Number(searchParams.serialNumber) },
-      ];
-    }
-
-    return await listMany(query);
+  if (searchParams.serialNumber) {
+    query = { serialNumber: { $regex: searchParams.serialNumber } };
   }
 
-  const packages = await fetchPackages();
-  
+  const packages = await listMany(query);
+
   return (
     <main className="gap-4 flex justify-center p-8">
       <div className="grid gap-4 container grid-rows-[min-content_1fr] ">

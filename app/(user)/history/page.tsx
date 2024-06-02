@@ -7,18 +7,15 @@ import { HistoryTableFilter } from "./filter";
 interface Params {
   searchParams: {
     serialNumber?: string;
-  }
+  };
 }
 
 export default async function Table({ searchParams }: Params) {
   async function fetchTrackerPackages() {
-    const query: Filter<IPackage> = {};
+    let query: Filter<IPackage> = {};
 
     if (searchParams.serialNumber) {
-      query.$or = [
-        { serialNumber: searchParams.serialNumber },
-        { serialNumber: Number(searchParams.serialNumber) },
-      ];
+      query = { serialNumber: searchParams.serialNumber };
       return await listMany(query);
     }
 
@@ -35,7 +32,9 @@ export default async function Table({ searchParams }: Params) {
 
           <HistoryTableFilter />
 
-          <small className="text-gray-500">Busque por um número de serial para preencher a tabela abaixo.</small>
+          <small className="text-gray-500">
+            Busque por um número de serial para preencher a tabela abaixo.
+          </small>
         </div>
 
         <HistoryTable data={history} />
