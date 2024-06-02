@@ -21,25 +21,25 @@ export interface UDPDecoded {
 }
 
 export interface KOREDecoded {
-  device_Type: string;
-  serial: string | number;
-  "ID Msg": string;
-  "sub ID Msg": string;
-  timestamp: number;
+  deviceType: string;
+  serialNumber: string | number;
+  messageId: string;
+  sequencieId: string;
+  tsGps: number;
   latitude: string;
   longitude: string;
   "gps status": number;
   "qtde Sat": number;
   altitude: number;
-  velocidade: number;
+  speed: number;
   direcao: number;
-  "bateria externa": number;
-  "bateria interna": number;
+  externalBattery: number;
+  internalBattery: number;
   "ignicao status": number;
   "bateria status": number;
   "estado bloqueio": number;
-  hodometro: number;
+  odometer: number;
   horimetro: number;
-  temperatura: number;
-  "network info": number;
+  internalTemp: number;
+  networkInfo: number;
 }

@@ -6,7 +6,7 @@ export type ILastPackage = |
     from: 'UDP'
   }
   | IPackage<KOREDecoded> & {
-    from: 'KORE'
+    from: 'LW'
   }
 
 
