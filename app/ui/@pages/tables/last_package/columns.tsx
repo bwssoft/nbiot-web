@@ -3,65 +3,42 @@ import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<ILastPackage>[] = [
   {
-    header: 'Número serial',
+    header: "Número serial",
     accessorKey: "serialNumber",
-    cell: (cell) => <span>{cell.row.original.serialNumber?.toString()}</span>
+    cell: (cell) => <span>{cell.row.original.serialNumber?.toString()}</span>,
   },
   {
-    id: 'messageId',
-    header: "ID da mensagem",
-    cell: (cell) => {
-      if (cell.row.original.from === 'KORE') {
-        return cell.row.original.decoded["ID Msg"]
-      }
-
-      return cell.row.original.decoded.messageId
-    }
-  },
-  {
-    id: 'coords',
+    id: "coords",
     header: "Coordenadas (latitude, longitude)",
     cell: (cell) => {
-      if (cell.row.original.decoded.latitude === 0 && cell.row.original.decoded.longitude === 0) {
-        return 'Sem sinal GPS'
-      }
-      
-      return `${cell.row.original.decoded.latitude}, ${cell.row.original.decoded.longitude}`
-    }
-  },
-  {
-    id: "internalBattery",
-    header: "Bateria interna",
-    cell: (cell) => {
-      if (cell.row.original.from === 'KORE') {
-        return cell.row.original.decoded["bateria interna"]
+      if (
+        cell.row.original.decoded.latitude === 0 &&
+        cell.row.original.decoded.longitude === 0
+      ) {
+        return "Sem sinal GPS";
       }
 
-      return cell.row.original.decoded.internalBattery
-    }
+      return `${cell.row.original.decoded.latitude}, ${cell.row.original.decoded.longitude}`;
+    },
   },
   {
-    id: "externalBattery",
-    header: "Bateria externa",
+    id: "connection_type",
+    header: "Conexão",
     cell: (cell) => {
-      if (cell.row.original.from === 'KORE') {
-        return cell.row.original.decoded["bateria externa"]
-      }
-
-      return cell.row.original.decoded.externalBattery
-    }
+      return cell.row.original.from;
+    },
   },
   {
     id: "date",
     header: "Data",
     cell: (cell) => {
-      if (cell.row.original.from === 'KORE') {
-        let unix_timestamp = cell.row.original.decoded.timestamp;
+      if (cell.row.original.from === "LW") {
+        let unix_timestamp = cell.row.original.decoded.tsGps;
         const date = new Date(unix_timestamp * 1000);
-        return date.toLocaleString()
+        return date.toLocaleString();
       }
 
-      return cell.row.original.decoded.tsGps.toLocaleString()
-    }
+      return cell.row.original.decoded.tsGps.toLocaleString();
+    },
   },
 ];
