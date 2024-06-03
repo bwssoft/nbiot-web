@@ -10,9 +10,13 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function DeviceSideBar(props: {
   tsGps: string;
-  deviceType: string | number;
+  from: string;
   serialNumber: string;
   coords: string;
+  altitude: number;
+  internalBattery: number;
+  externalBattery: number;
+  speed: number;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -179,7 +183,7 @@ export default function DeviceSideBar(props: {
                               Tipo do Dispositivo
                             </dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                              {props.deviceType}
+                              {props.from === "LW" ? "LoRa" : "NB2"}
                             </dd>
                           </div>
                           <div>
@@ -196,6 +200,38 @@ export default function DeviceSideBar(props: {
                             </dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
                               {props.coords}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              Altitude
+                            </dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                              {props.altitude}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              Bateria Interna
+                            </dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                              {props.internalBattery}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              Bateria Externa
+                            </dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                              {props.externalBattery}
+                            </dd>
+                          </div>
+                          <div>
+                            <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
+                              Velocidade
+                            </dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                              {props.speed}
                             </dd>
                           </div>
                         </dl>

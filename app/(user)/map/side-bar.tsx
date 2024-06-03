@@ -12,12 +12,19 @@ export async function SideBar(props: { serialNumber: string }) {
     <DeviceSideBar
       serialNumber={pack?.serialNumber}
       coords={`${pack.decoded.latitude}, ${pack.decoded.longitude}`}
-      deviceType={pack?.decoded.deviceType}
-      tsGps={
-        pack.from === "LW"
-          ? new Date(pack.decoded.tsGps * 1000).toLocaleString()
-          : pack.decoded.tsGps.toLocaleString()
-      }
+      from={pack?.from}
+      altitude={pack.decoded.altitude}
+      internalBattery={pack.decoded.internalBattery}
+      externalBattery={pack.decoded.externalBattery}
+      speed={pack.decoded.speed}
+      tsGps={new Intl.DateTimeFormat("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }).format(new Date(pack.created_at))}
     />
   );
 }
