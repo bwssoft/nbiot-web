@@ -4,7 +4,7 @@ type Constructor<Decoded> = {
   package: string
   created_at: Date
   remote_info: RemoteInfo
-  serialNumber: number | string
+  serialNumber: string
   from: From
 }
 
