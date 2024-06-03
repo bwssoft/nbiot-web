@@ -50,7 +50,7 @@ export default function DeviceSideBar(props: {
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
-                            className="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500"
+                            className="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-bws-500"
                             onClick={handleOnClose}
                           >
                             <span className="absolute -inset-2.5" />
@@ -89,7 +89,7 @@ export default function DeviceSideBar(props: {
                               <div className="mt-5 flex flex-wrap space-y-3 sm:space-x-3 sm:space-y-0">
                                 <button
                                   type="button"
-                                  className="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
+                                  className="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-bws-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-bws-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bws-600 sm:flex-1"
                                 >
                                   Message
                                 </button>

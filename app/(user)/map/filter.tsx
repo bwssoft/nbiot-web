@@ -24,7 +24,7 @@ export function SerialMapFilter() {
   return (
     <form action={onAction} className="flex items-end gap-4">
       <InputComponent label="Pesquisar por número serial" name="serialNumber" />
-      <Button type="submit" className="w-20 h-9 bg-indigo-200 text-indigo-700">
+      <Button type="submit" className="w-20 h-9 bg-bws-200 text-bws-700">
         Buscar
       </Button>
     </form>
