@@ -32,13 +32,14 @@ export const columns: ColumnDef<ILastPackage>[] = [
     id: "date",
     header: "Data",
     cell: (cell) => {
-      if (cell.row.original.from === "LW") {
-        let unix_timestamp = cell.row.original.decoded.tsGps;
-        const date = new Date(unix_timestamp * 1000);
-        return date.toLocaleString();
-      }
-
-      return cell.row.original.decoded.tsGps.toLocaleString();
+      return new Intl.DateTimeFormat("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }).format(new Date(cell.row.original.created_at));
     },
   },
 ];
