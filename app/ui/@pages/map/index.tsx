@@ -55,10 +55,21 @@ export default function Map(props: {
       id: "icon-layer",
       pickable: true,
       data: coordinates,
-      sizeScale: 20,
+      sizeScale: 30,
       onClick: (e) => {
-        console.log("e.object", e.object);
         props.onClickIcon(e.object);
+        const fitBound = getFitBound(
+          coordinates.map((c) => ({
+            lat: Number(e.object.coordinates.lat),
+            lng: Number(e.object.coordinates.lng),
+          }))
+        );
+        setInitialViewState({
+          ...initialViewState,
+          longitude: fitBound.centerLng,
+          latitude: fitBound.centerLat,
+          zoom: fitBound.zoom,
+        });
       },
       getIcon: () => ({
         url: svgToDataURL(`<svg width="26" height="31" viewBox="0 0 26 31" fill="none" xmlns="http://www.w3.org/2000/svg">
