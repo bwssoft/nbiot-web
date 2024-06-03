@@ -1,3 +1,4 @@
+import next from 'next';
 import type { NextAuthConfig } from 'next-auth';
 
 export const authConfig = {
@@ -9,13 +10,15 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isLoginPage = nextUrl.pathname.startsWith("/login")
       const isAuthRoutes =
-        nextUrl.pathname === "/"
+        nextUrl.pathname === "/map" || nextUrl.pathname === "/table" || nextUrl.pathname === "/history"
 
       if (!isAuthRoutes && !isLoggedIn) return true
 
       if (isAuthRoutes && !isLoggedIn && !isLoginPage) return Response.redirect(new URL("/login", nextUrl))
 
-      if (isLoggedIn && isLoginPage) return Response.redirect(new URL("/", nextUrl))
+      if (isLoggedIn && isLoginPage) return Response.redirect(new URL("/map", nextUrl))
+
+      if (isLoggedIn && nextUrl.pathname === "/") return Response.redirect(new URL("/map", nextUrl))
       return true;
     },
     jwt({ user, token }) {
