@@ -2,7 +2,7 @@
 
 import { InputComponent } from "@/app/ui/input/index";
 import { formatSearchParams } from "@/app/util/formatSearchParams";
-import { Button } from "@bwsoft/button";
+import { Button } from "@/app/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 
 export function SerialTableFilter() {

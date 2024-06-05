@@ -1,6 +1,6 @@
 // import { listMany } from "@/app/lib/action/last_package";
 import { listMany } from "@/app/lib/action/search_package";
-
+import { Revalidate } from "@/app/ui/auto-refresh";
 import { ILastPackage } from "@/app/lib/definition/last_package";
 import { LastPackageTable } from "@/app/ui/@pages/tables/last_package";
 import { Filter } from "mongodb";
@@ -25,7 +25,10 @@ export default async function Table({ searchParams }: Params) {
     <main className="gap-4 flex justify-center p-8">
       <div className="grid gap-4 container grid-rows-[min-content_1fr] ">
         <div>
-          <h1 className="mb-4">Últimos dados recebidos</h1>
+          <div className="flex justify-between">
+            <h1 className="mb-4">Últimos dados recebidos</h1>
+            <Revalidate path="/table" />
+          </div>
           <div>
             <SerialTableFilter />
           </div>

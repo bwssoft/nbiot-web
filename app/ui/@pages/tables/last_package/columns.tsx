@@ -18,7 +18,9 @@ export const columns: ColumnDef<ILastPackage>[] = [
         return "Sem sinal GPS";
       }
 
-      return `${cell.row.original.decoded.latitude}, ${cell.row.original.decoded.longitude}`;
+      return `${Number(cell.row.original.decoded.latitude).toFixed(
+        5
+      )}, ${Number(cell.row.original.decoded.longitude).toFixed(5)}`;
     },
   },
   {

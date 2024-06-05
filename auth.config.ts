@@ -10,7 +10,7 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isLoginPage = nextUrl.pathname.startsWith("/login")
       const isAuthRoutes =
-        nextUrl.pathname === "/map" || nextUrl.pathname === "/table" || nextUrl.pathname === "/history"
+        nextUrl.pathname === "/map" || nextUrl.pathname === "/table" || nextUrl.pathname === "/history" || nextUrl.pathname === "/"
 
       if (!isAuthRoutes && !isLoggedIn) return true
 
@@ -19,6 +19,7 @@ export const authConfig = {
       if (isLoggedIn && isLoginPage) return Response.redirect(new URL("/map", nextUrl))
 
       if (isLoggedIn && nextUrl.pathname === "/") return Response.redirect(new URL("/map", nextUrl))
+
       return true;
     },
     jwt({ user, token }) {

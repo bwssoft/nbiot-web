@@ -4,6 +4,7 @@ import { Filter } from "mongodb";
 import { ILastPackage } from "@/app/lib/definition/last_package";
 import { SideBar } from "./side-bar";
 import { MapComponent } from "./map";
+import { Revalidate } from "@/app/ui/auto-refresh";
 
 interface Params {
   searchParams: {
@@ -30,7 +31,10 @@ export default async function MapPage({ searchParams }: Params) {
           <></>
         )}
         <div>
-          <h1 className="mb-4">Mapa</h1>
+          <div className="flex justify-between">
+            <h1 className="mb-4">Mapa</h1>
+            <Revalidate path="/table" />
+          </div>
           <div>
             <SerialMapFilter />
           </div>
