@@ -2,6 +2,7 @@ import "@/app/assets/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NavBar } from "../ui/navbar";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         style={inter.style}
         className="h-screen overflow-hidden grid grid-rows-[min-content_1fr]"
       >
+        <NextTopLoader height={4} color="#2BB7E3" />
         <NavBar />
         {children}
       </body>
